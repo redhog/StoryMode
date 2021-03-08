@@ -1,0 +1,294 @@
+.rotate(@angle) {
+  /* Safari */
+  -webkit-transform: rotate(@angle);
+  /* Firefox */
+  -moz-transform: rotate(@angle);
+  /* IE */
+  -ms-transform: rotate(@angle);
+  /* Opera */
+  -o-transform: rotate(@angle);
+}
+
+.Timeline {
+  cursor: pointer;
+  z-index: 0;
+  user-select: none;
+
+  .bubble {
+    &.top-left,&.top-right {
+      position: absolute;
+      bottom: 100%;
+    }
+    &.top-right {
+      right: 0;
+    }
+    > * {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  .zoom {
+    z-index: 1000;
+    height: 22pt;
+    position: absolute;
+    width: 50pt;
+    padding: 0;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    div {
+        display: inline-block;
+    }
+
+    &.right {
+      right: 0;
+    }
+
+    .zoomIn, .zoomOut {
+      color: #990000;
+      cursor: pointer;
+      float: left;
+      padding: 3px;
+      clear: both;
+      line-height: 22pt;
+      &:hover {
+        text-decoration: none;
+      }
+
+        .fa {
+    color: #990000;
+    font-size: 20pt;
+    width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    text-align: center;
+  }
+    }
+  }
+
+  .overlay, .underlay {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    font-size: 0; // Hide spaces between inline blocks
+
+    .leftFrame, .rightFrame, .window {
+      position: relative;
+      height: 100%;
+      display: inline-block;
+    }
+
+    .leftFrame, .rightFrame {
+      z-index: 1;
+      background-color: #990000;
+      opacity: .1;
+    }
+
+    .window {
+      font-size: 10pt;
+      z-index: 2;
+
+      border-radius: 4pt; 
+      -moz-border-radius: 4pt; 
+      -webkit-border-radius: 4pt; 
+
+      .frame {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .overlay {
+    z-index: 1;
+
+    .window { 
+      padding-left: 4pt;
+      padding-right: 4pt;
+      margin-left: -4pt;
+      margin-right: -4pt;
+      cursor: col-resize;
+
+      .dragHandle {
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+      }
+      .leftDragHandle {
+        margin-left: -14px;
+      }
+      .rightDragHandle {
+        right: 0;
+        margin-right: -9px;
+      }
+
+      .frame {
+        cursor: pointer;
+
+        .startLabel, .lengthLabel, .endLabel {
+          position: absolute;
+          white-space: nowrap;
+        }
+        .startLabel span, .endLabel span {
+          color: #990000;
+          font-size: 20pt;
+          font-weight: 600;
+        }
+
+        .lengthLabel span {
+          padding: 2pt;
+          color: #990000;
+        }
+
+        .startLabel, .endLabel {
+          font-size: 20pt;
+          top: 3pt;
+        }
+
+        .startLabel {
+          left: 10px;
+        }
+        .lengthLabel {
+          bottom: 0;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+        .endLabel {
+          right: 10px;
+        }
+      }
+    }
+  }
+
+  .underlay {
+    z-index: -1;
+    top: -200%;
+
+    .window {
+      -moz-box-shadow: 3px 3px 13px #990000;
+      -webkit-box-shadow: 3px 3px 13px #990000;
+      box-shadow: 3px 3px 13px #990000;
+    }
+  }
+
+  .line-visibility {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    z-index: 0;
+
+    .line {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      .rangemarks {
+        position: absolute;
+        opacity: 0.9;
+        width: 100%;
+        height: 100%;
+        font-size: 0;
+        .rangemark {
+          position: absolute;
+          height: 100%;
+          background-color: #ffffff !important;
+        }
+      }
+
+      .tickmarks-container {
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        top: 30%;
+        z-index: 1;
+      }
+
+      .tickmarks {
+        width: 100%;
+        line-height: 1em;
+
+        white-space: nowrap;
+        font-size: 10pt;
+
+        .quanta {
+          position: relative;
+          display: inline-block;
+          height: 100%;
+          padding: 1pt;
+
+          .frame {
+            padding-left: 4pt;
+            padding-right: 4pt;
+            height: 100%;
+
+            .debug {
+              display: none;
+            }
+
+            .quanta-label {
+              display: block;
+              color: black;
+              width: 100%;
+              height: 100%;
+              text-align: center;
+              font-size: 10pt;
+              .left {
+                float: left;
+              }
+              .center {
+              }
+              .right {
+                float: right;
+              }
+
+            }
+          }
+        }
+
+        &.top {
+          height: 30% !important;
+          .even .frame {
+            outline: 1px solid #990000;
+            .quanta-label {
+              color: #990000;
+            }
+          }
+
+          .odd .frame {
+            outline: 1px solid #990000;
+            .quanta-label {
+              color: #990000;
+            }
+          }
+        }
+
+        &.bottom {
+          height: 70% !important;
+
+          .quanta .frame {
+            padding: 1px;
+          }
+
+          .even .frame {
+            //background-color: #ffaaaa;
+            .quanta-label {
+              color: #990000;
+            }
+          }
+
+          .odd .frame {
+            //background-color: #ffaaaa;
+            .quanta-label {
+              color: #990000;
+            }
+          }
+        }  
+      }
+    }
+  }
+}
