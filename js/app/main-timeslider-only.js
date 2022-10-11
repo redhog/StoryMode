@@ -32,11 +32,16 @@ define([
 
       zoomPosition: 'left',
       maxWindowSize: 1000*60*60*24*365*42,
-      windowStart: new Date('1979-04-24'),
+      windowStart: new Date('2016-03-06'),
       windowEnd: new Date('2021-03-06'),
 
       rangemarks: [
-          {start:new Date('1979-04-24'), end:new Date('2021-03-06'), css:{background:"#ff0000", 'z-index': 0, opacity: 1.0}},
+          {start:new Date('1979-04-24'), end:new Date('2021-03-06'), css:{background:"#ffffff", 'z-index': 0, opacity: 1.0}},
+          
+          {start:new Date('2000-07-14'), end:new Date('2001-07-14'), cls: "period", css:{'z-index': 1, opacity: 1.0}},
+          {start:new Date('2005-01-01'), end:new Date('2006-07-21'), cls: "period", css:{'z-index': 1, opacity: 1.0}},
+          {start:new Date('2017-07-01'), end:new Date('2020-03-01'), cls: "period", css:{'z-index': 1, opacity: 1.0}},
+          {start:new Date('2014-12-25'), end:new Date('2114-12-25'), cls: "saghar", css:{'z-index': 1, opacity: 1.0}},
       ],
       backgroundCss: {background: "#aaaaaa"},
 
@@ -98,11 +103,15 @@ define([
         width: 0.5
       })
     });
-      
+    lineStyleHidden = new ol.style.Style({
+      stroke: null
+    });
+     
     var vectorSource = new ol.source.Vector();
     var vectorLayer = new ol.layer.Vector({source: vectorSource});
     map.addLayer(vectorLayer);
 
+    var lines = [];
     var prev = null;
     data.map(function (d) {
       if (d.url) {
@@ -130,6 +139,11 @@ define([
         });
         featureLine.setStyle(lineStyle);
         vectorSource.addFeature(featureLine);
+        featureLine.startIdx = prev.idx;
+        featureLine.startDate = prev.date;
+        featureLine.endDate = d.date;
+        featureLine.endIdx = d.idx;
+        lines.push(featureLine);
       }
         
       prev = d;
@@ -204,6 +218,13 @@ define([
       } else {
         set_current(sorted[sorted.length-1].idx);
       }
+      lines.map(function (line) {
+          if ((line.startDate > args.end) | (line.endDate < args.start)) {
+              line.setStyle(lineStyleHidden);
+          } else {
+              line.setStyle(lineStyle);
+          }
+      });
     });
 
     $(document).ready(function() {

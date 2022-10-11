@@ -56,6 +56,10 @@
         height: 100%;
         overflow: hidden;
       }
+      .Timeline .overlay .window .frame {
+        outline: 3px dashed #990000;
+        outline-offset: -3px;
+      }
       .ol-attribution, .ol-zoom {
         display: none !important;
       }
@@ -75,6 +79,26 @@
         top: 0;
         right: 0;
         bottom: 0;
+      }
+      .period {
+        height: revert !important;
+        bottom: 70%;
+        top: 0;
+        border: 1px dashed #990000;
+        background: repeating-linear-gradient(
+          135deg,
+          #ff9999,
+          #ff9999 1pt,
+          #ffffff 1pt,
+          #ffffff 5pt
+        );
+      }
+      .saghar {
+        height: revert !important;
+        bottom: 75%;
+        top: 5%;
+        border: 2px dashed #000000;
+        background: none !important;
       }
     </style>
     <script type="text/javascript">

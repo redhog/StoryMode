@@ -22,8 +22,8 @@ define([], function () {
       {"url": "Images/1999 Egil.5.jpg", "date": "1999-10-01", "lat": 63.414819, "lon": 13.000441},
       {"url": "Images/1999 {FB43259F-DD1D-49CC-98B5-235F744BEA77}.jpg", "date": "1999-11-01", "lat": 58.410317, "lon": 15.618613},
       {"url": "Images/1999 oratb_35.jpg", "date": "1999-12-01", "lat": 58.410317, "lon": 15.618613},
-      {"url": "Images/2000 Tuxus.png", "date": "2000-01-01", "lat": 48.861670, "lon": 2.347804, "type": "home"},
-      {"html": "<div class='intro centered'><h2 style='margin-top: 200pt;'>In memory of</h2><h1>Cecile</h1></div>", "date": "2000-07-01", "lat": 48.861670, "lon": 2.347804},
+      {"url": "Images/2000 Tuxus.png", "date": "2000-07-14", "lat": 48.861670, "lon": 2.347804, "type": "home"},
+      {"html": "<div class='intro centered'><h2 style='margin-top: 200pt;'>In memory of</h2><h1>Cecile</h1></div>", "date": "2000-07-15", "lat": 48.861670, "lon": 2.347804},
       {"url": "Images/2003-01 Orm.svg", "date": "2003-01-01", "lat": 58.410334, "lon": 15.618497},
       {"url": "Images/2003-2 ESLogo.6.png", "date": "2003-02-01","lat": 58.410334, "lon": 15.618497 },
       {"url": "Images/2004 {AD7539EE-9F23-4237-A927-57109366FA6E}.jpg", "date": "2004-03-01", "lat": 58.410334, "lon": 15.618497},        
@@ -69,7 +69,6 @@ define([], function () {
       {"url": "Images/2017-08-22 IMG_20170822_203009.jpg", "date": "2017-08-22", "lat": 69.642946, "lon": 19.019378},
       {"url": "Images/2017-09-22 IMG_20170922_221655.jpg", "date": "2017-09-22", "lat": 69.662063, "lon": 18.964962, "type": "home"},
       {"url": "Images/2017-12-10 IMG_20171210_120425.jpg", "date": "2017-12-10", "lat": 69.652089, "lon": 18.974519},
-      /*  
       {"html": "\
     <div class=\"intro centered\">\
       <div><img src=\"img/logo.red.svg\" style=\"width: 40%; margin-top: -40pt; margin-bottom: -60pt;\"></div>\
@@ -77,7 +76,6 @@ define([], function () {
       <div style=\"font-size: 32pt;\">'Igelkott' is swedish for 'hedgehog'</div>\
     </div>\
 ", "date": "2018-01-01", "lat": 69.652089, "lon": 18.974519}
-*/
     ];
     res = res.map(function (a) {
         a.date = new Date(a.date);

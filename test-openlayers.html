@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+      .map {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+    </style>
+    <script src="OpenLayers-v6.5.0/ol.js"></script>
+    <link rel="stylesheet" href="OpenLayers-v6.5.0/ol.css">
+  </head>
+
+  <body>
+    <div id="map" class="map">
+    <script>
+      map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 0
+        })
+      });
+
+      // function applies greyscale to every pixel in canvas
+      function greyscale(context) {
+          var canvas = context.canvas;
+           var width = canvas.width;
+           var height = canvas.height;
+          var imageData = context.getImageData(0, 0, width, height);
+           var data = imageData.data;
+          for(i=0; i<data.length; i += 4){
+            var r = data[i];
+            var g = data[i + 1];
+            var b = data[i + 2];
+            // CIE luminance for the RGB
+            var v = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            // Show white color instead of black color while loading new tiles:
+            if(v === 0.0)
+             v=255.0;  
+            data[i+0] = v; // Red
+            data[i+1] = v; // Green
+            data[i+2] = v; // Blue
+            data[i+3] = 255; // Alpha
+           }
+          context.putImageData(imageData,0,0);
+
+      }
+
+      tileLayer = new ol.layer.Tile({source: new ol.source.OSM()});
+                                  
+tileLayer.on('postrender', function(event) {
+ greyscale(event.context);
+});
+      
+      map.addLayer(tileLayer);
+
+
+      iconFeature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([4.35247, 50.84673]))
+      });
+
+      iconStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 46],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'pixels',
+      src: 'img/icon.red.svg',
+      scale:0.3
+        }),
+      });
+
+      iconFeature.setStyle(iconStyle);
+      var vectorSource = new ol.source.Vector({
+        features: [iconFeature],
+      });
+
+      var vectorLayer = new ol.layer.Vector({
+        source: vectorSource,
+      });
+
+      map.addLayer(vectorLayer);
+
+      var points = [
+        ol.proj.fromLonLat([78.65, -32.65]),
+        ol.proj.fromLonLat([-98.65, 12.65])
+      ];
+
+      var featureLine = new ol.Feature({
+          geometry: new ol.geom.LineString(points)
+      });
+      featureLine.setStyle(new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: '#ffcc33',
+        width: 20
+      })
+    }));
+
+      var sourceLine = new ol.source.Vector({
+          features: [featureLine]
+        });
+
+      var vectorLine = new ol.layer.Vector({
+          source: sourceLine
+        });
+
+      map.addLayer(vectorLine);
+      
+    </script>
+  </body>
+</html>

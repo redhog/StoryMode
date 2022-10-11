@@ -547,8 +547,9 @@ define([
           var left = 100.0 * (start - self.start) / (self.end - self.start);
           var width = 100.0 * (end - start) / (self.end - self.start);
           var rangemarkNode = $("<div class='rangemark'>");
+          if (rangemark.cls) rangemarkNode.addClass(rangemark.cls);
           rangemarkNode.css({width: width + '%', left: left + '%'});
-          rangemarkNode.css(rangemark.css);
+          if (rangemark.css) rangemarkNode.css(rangemark.css);
           self.rangemarksNode.append(rangemarkNode);
         }
       });
