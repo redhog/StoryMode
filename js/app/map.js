@@ -1,5 +1,5 @@
 define([
-    'OpenLayers/ol'
+  'libs/ol/ol'
 ], function (
   ol
 ) {

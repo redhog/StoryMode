@@ -6,7 +6,7 @@ define([
   "app/Visualization/UI/Widgets/Timeline/Timeline",
   "app/Visualization/UI/Widgets/Timeline/TimeLabel",
   "app/map",
-  'OpenLayers/ol',
+  'libs/ol/ol',
   "app/data",
 ], function (
   async,
@@ -18,6 +18,9 @@ define([
   data
 ) {
   $(document).ready(function () {
+
+    map.updateSize();
+      
     timeline = new Timeline({
       'class': 'main-timeline',
       startLabelPosition: 'inside',

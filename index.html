@@ -105,15 +105,14 @@
       dojoConfig = {
         isDebug: true,
         async: true,
-        baseUrl: "js/libs/dojo",
-        packages: [{name: 'app', location:'../../../js/app', main: 'main'},
-                   {name: 'libs', location:'../../../js/libs', main: 'main'},
-                   {name: 'shims', location:'../../../js/shims', main: 'main'},
-                   {name: 'OpenLayers', location:'../../../OpenLayers-v6.5.0', main: 'main'}]
+        baseUrl: "js/bower_components/dojo",
+        packages: [{name: 'app', location:'../../app', main: 'main'},
+                   {name: 'libs', location:'..', main: 'main'},
+                   {name: 'shims', location:'../../shims', main: 'main'}]
       };
     </script>
-    <script type="text/javascript" src="js/libs/dojo/dojo.js"></script>
-    <link rel="stylesheet" href="OpenLayers-v6.5.0/ol.css">
+    <script type="text/javascript" src="js/bower_components/dojo/dojo.js"></script>
+    <link rel="stylesheet" href="js/bower_components/openlayers/src/ol/ol.css">
     <script>
       require(["app/LangExtensions", "app/main-timeslider-only"], function (main) {});
     </script>
